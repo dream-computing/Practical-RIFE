@@ -12,3 +12,8 @@ test/
 *.npz
 
 *.zip
+venv
+output
+frame1.jpg
+frame2.jpg
+__pycache__
