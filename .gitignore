@@ -2,7 +2,6 @@
 *.py~
 *.py#
 
-*.pkl
 output/*
 train_log/*
 *.mp4
@@ -14,6 +13,4 @@ test/
 *.zip
 venv
 output
-frame1.jpg
-frame2.jpg
 __pycache__
