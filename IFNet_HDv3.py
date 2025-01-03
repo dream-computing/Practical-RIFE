@@ -1,7 +1,9 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from model.warplayer import warp
+
+from rife.model.warplayer import warp
+
 # from train_log.refine import *
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

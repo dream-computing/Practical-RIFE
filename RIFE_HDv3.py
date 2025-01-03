@@ -1,14 +1,9 @@
 import torch
-import torch.nn as nn
-import numpy as np
-from torch.optim import AdamW
-import torch.optim as optim
-import itertools
-from model.warplayer import warp
 from torch.nn.parallel import DistributedDataParallel as DDP
-from IFNet_HDv3 import *
-import torch.nn.functional as F
-from model.loss import *
+from torch.optim import AdamW
+
+from rife.IFNet_HDv3 import *
+from rife.model.loss import *
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
@@ -45,13 +40,13 @@ class Model:
                 return param
         if rank <= 0:
             if torch.cuda.is_available():
-                self.flownet.load_state_dict(convert(torch.load('flownet.pkl')), False)
+                self.flownet.load_state_dict(convert(torch.load('models/flownet.pkl')), False)
             else:
-                self.flownet.load_state_dict(convert(torch.load('flownet.pkl', map_location ='cpu')), False)
+                self.flownet.load_state_dict(convert(torch.load('models/flownet.pkl', map_location ='cpu')), False)
         
     def save_model(self, path, rank=0):
         if rank == 0:
-            torch.save(self.flownet.state_dict(),'flownet.pkl')
+            torch.save(self.flownet.state_dict(),'models/flownet.pkl')
 
     def inference(self, img0, img1, timestep=0.5, scale=1.0):
         imgs = torch.cat((img0, img1), 1)
